@@ -10,10 +10,10 @@ ARCH 	:=
 CC   	:=$(ARCH)gcc
 LD		:=$(ARCH)ld
 OBJCOPY :=$(ARCH)objcopy
-CFLAG   :=  -nostdlib
+CFLAG   :=  -march=armv4
 #文件设置
 DST     := dev
-OBJS    := start.o
+OBJS    := start.o 
 OBJC    := led.o uart.o main.o
 DEPENDS := $(patsubst %.o,%.d,$(OBJC))
 
@@ -21,11 +21,13 @@ DEPENDS_FILES := $(patsubst %.d,$(DEPENDS_DIR)/%.d,$(DEPENDS))
 DEPENDS_FILES := $(wildcard $(DEPENDS_FILES))
 OBJ_BULIDS    := $(patsubst %.o,$(BUILD_DIR)/%.o,$(OBJS))
 OBJ_BULIDC    := $(patsubst %.o,$(BUILD_DIR)/%.o,$(OBJC))
-
+LIBS := 
+#LIBS += -lgcc -L/usr/lib/gcc/arm-linux-gnueabihf/8
+CFLAG += $(LIBS)
 
 #主要目标
 all:$(OBJ_BULIDS) $(OBJ_BULIDC)
-	$(LD) -Ttext 0 $^ -o $(BUILD_DIR)/$(DST).elf
+	$(LD) -Ttext 0 -Tdata 0x80c  $^ -o $(BUILD_DIR)/$(DST).elf
 	$(OBJCOPY) -O binary -S $(BUILD_DIR)/$(DST).elf $(DST).bin
 	objdump -s $(BUILD_DIR)/$(DST).elf > $(DEBUG_DIR)/$(DST).hex
 	objdump -D $(BUILD_DIR)/$(DST).elf > $(DEBUG_DIR)/$(DST).asm
@@ -47,6 +49,7 @@ $(BUILD_DIR)/%.o:%.c
 clean:
 	rm $(BUILD_DIR)/*
 	rm $(DEBUG_DIR)/* 
+	rm *.bin
 clean_dir:
 	rmdir $(BUILD_DIR)
 	rmdir $(DEBUG_DIR)

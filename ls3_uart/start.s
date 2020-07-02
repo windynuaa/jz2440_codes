@@ -25,6 +25,9 @@ _start:
     ldr r3,[r0]
     cmp r2,r3
     moveq sp,#4096//nand
+    str r1,[r0]
+    
+    //mov sp,#4096
     //c程序
     mov r0,#0x1500
     mov r1,#0

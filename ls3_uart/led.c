@@ -4,6 +4,10 @@ void delay(int a)
 {
     while (a--);
 }
+void init_led()
+{
+    GPFCON=0X1500;
+}
 int dim_led(int a)
 {
     char c='b';
@@ -12,13 +16,20 @@ int dim_led(int a)
     {
         
         GPFDAT=0x5<<4;
-        delay(10000);
+        delay(100000);
         GPFDAT=0x2<<4;
-        delay(10000);
-        c=getc();
-        putc(c);
+        delay(100000);
+        //c=getc();
+        //putc(c);
         //puts("hello led \r\n");
     }
     return 1;
 }
 
+void open_led(int a)
+{
+    if(a)
+        GPFDAT=0x2<<4;
+    else
+        GPFDAT=0x5<<4;
+}

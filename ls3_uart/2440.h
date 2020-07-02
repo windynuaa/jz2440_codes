@@ -24,13 +24,16 @@
 #define UTRSTAT0 (*((volatile unsigned int*) 0x50000010))
 #define UTRSTAT1 (*((volatile unsigned int*) 0x50004010))
 #define UTRSTAT2 (*((volatile unsigned int*) 0x50008010))
+/*
+一开始定义串口数据寄存器位char型，结果在赋值时遇到问题，改为int后解决
 
-#define UTXH0   (*((volatile unsigned char*) 0x50000020))
-#define UTXH1   (*((volatile unsigned char*) 0x50004020))
-#define UTXH2   (*((volatile unsigned char*) 0x50008020))
+*/
+#define UTXH0   (*((volatile unsigned int*) 0x50000020))
+#define UTXH1   (*((volatile unsigned int*) 0x50004020))
+#define UTXH2   (*((volatile unsigned int*) 0x50008020))
 
-#define URXH0   (*((volatile unsigned char*) 0x50000024))
-#define URXH1   (*((volatile unsigned char*) 0x50004024))
-#define URXH2   (*((volatile unsigned char*) 0x50008024))
+#define URXH0   (*((volatile unsigned int*) 0x50000024))
+#define URXH1   (*((volatile unsigned int*) 0x50004024))
+#define URXH2   (*((volatile unsigned int*) 0x50008024))
 
 #endif
