@@ -19,7 +19,7 @@ int dim_led(int a)
         delay(100000);
         GPFDAT=0x2<<4;
         delay(100000);
-        printf("asd4%c,%c,%c,%c,%c %s\n\r,%x",'x','s','s','s','x',"8908",0xabcdef);
+        //printf("asd4%c,%c,%c,%c,%c %s\n\r,%x",'x','s','s','s','x',"8908",0xabcdef);
     }
     return 1;
 }

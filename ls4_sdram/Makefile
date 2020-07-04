@@ -15,7 +15,7 @@ CFLAG   :=  -march=armv4
 #文件设置
 DST     := dev
 OBJS    := start.o 
-OBJC    := led.o uart.o main.o
+OBJC    := led.o uart.o main.o init.o
 DEPENDS := $(patsubst %.o,%.d,$(OBJC))
 
 DEPENDS_FILES := $(patsubst %.d,$(DEPENDS_DIR)/%.d,$(DEPENDS))
@@ -28,7 +28,7 @@ CFLAG += $(LIBS)
 
 #主要目标
 all:$(OBJ_BULIDS) $(OBJ_BULIDC)
-	$(LD) -Ttext 0 -Tdata 0x80c  $^ -o $(BUILD_DIR)/$(DST).elf
+	$(LD) -Ttext 0 -Tdata 0xa0c  $^ -o $(BUILD_DIR)/$(DST).elf
 	$(OBJCOPY) -O binary -S $(BUILD_DIR)/$(DST).elf $(DST).bin
 	$(OBJDUMP) -s $(BUILD_DIR)/$(DST).elf > $(DEBUG_DIR)/$(DST).hex
 	$(OBJDUMP) -D $(BUILD_DIR)/$(DST).elf > $(DEBUG_DIR)/$(DST).asm
