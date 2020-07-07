@@ -15,7 +15,7 @@ CFLAG   :=  -march=armv4
 #文件设置
 DST     := dev
 OBJS    := start.o 
-OBJC    := led.o uart.o main.o init.o
+OBJC    := led.o uart.o main.o init.o interrupt.o
 DEPENDS := $(patsubst %.o,%.d,$(OBJC))
 
 DEPENDS_FILES := $(patsubst %.d,$(DEPENDS_DIR)/%.d,$(DEPENDS))

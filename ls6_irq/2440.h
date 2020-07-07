@@ -16,13 +16,28 @@
 #define MRSRB6      (*((volatile unsigned int*)  0x4800002C))   //Mode register set for SDRAM BANK6 
 #define MRSRB7      (*((volatile unsigned int*)  0x48000030))   //Mode register set for SDRAM BANK7 
 
+#define SRCPND      (*((volatile unsigned int*)  0X4A000000))   //SOURCE PENDING (SRCPND) REGISTER
+#define INTMOD      (*((volatile unsigned int*)  0X4A000004))   //INTERRUPT MODE (INTMOD) REGISTER
+#define INTMSK      (*((volatile unsigned int*)  0X4A000008))   //INTERRUPT MASK (INTMSK) REGISTER
+#define PRIORITY    (*((volatile unsigned int*)  0x4A00000C))   //PRIORITY REGISTER (PRIORITY)
+#define INTPND      (*((volatile unsigned int*)  0X4A000010))   //INTERRUPT PENDING (INTPND) REGISTER
+#define INTOFFSET   (*((volatile unsigned int*)  0x4A000014))   //INTERRUPT OFFSET (INTOFFSET) REGISTER
+
+
+
 #define GPFCON  (*((volatile unsigned int*)  0x56000050))
 #define GPFDAT  (*((volatile unsigned int*)  0x56000054))
 #define GPHCON  (*((volatile unsigned int*)  0x56000070))
 #define GPHDAT  (*((volatile unsigned int*)  0x56000074))
 #define GPHUP   (*((volatile unsigned int*)  0x56000078))
 
+#define EXTINT0  (*((volatile unsigned int*)  0x56000088))
+#define EXTINT1  (*((volatile unsigned int*)  0x5600008c))
+#define EXTINT2  (*((volatile unsigned int*)  0x56000090))
 
+
+#define EINTMASK  (*((volatile unsigned int*)  0x560000a4))
+#define EINTPEND  (*((volatile unsigned int*)  0x560000A8))
 
 #define UBRDIV0 (*((volatile unsigned int*)  0x50000028))
 #define UBRDIV1 (*((volatile unsigned int*)  0x50004028))

@@ -6,11 +6,10 @@ void delay(int a)
 }
 void init_led()
 {
-    GPFCON=0X1500;
+    GPFCON |=0X1500;
 }
-int dim_led(int a)
+int dim_led()
 {
-    GPFCON=a;//0X1500;
     while(1)
     {
         GPFDAT=0x5<<4;

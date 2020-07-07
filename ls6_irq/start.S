@@ -8,7 +8,7 @@ _start:
     ldr pc,=reset   //  abt prefetch
     ldr pc,=reset   //  abt data
     ldr pc,=reset   //  reserved
-    ldr pc,=reset   //  irq
+    ldr pc,=irq_addr   //  irq
     ldr pc,=reset   //  fiq
 und_addr:
     .word und
@@ -23,8 +23,8 @@ und_string:
 .align 4
 
 swi_addr:
-    .word swi
-swi:
+    .word swip
+swip:
     ldr sp,=0x30002000
     stmdb sp!,{r0-r12,lr}
     ldr r0,=swi_string
@@ -34,7 +34,17 @@ swi_string:
     .string "hello swi mode!"
 .align 4
 
-
+irq_addr:
+    .word irq
+irq:
+    ldr sp,=0x30003000
+    sub lr,lr,#4
+    stmdb sp!,{r0-r12,lr}
+    ldr r1,=0x4A000014
+    ldr r0,[r1]
+    bl process_irq
+    ldmia sp!,{r0-r12,pc}^ // ^ 表示将SPSR的值恢复到CPSR中
+.align 4
 
 
 reset:
@@ -46,6 +56,9 @@ reset:
     str r0,[r1]
     //提高时钟频率
     //fclk 400 hclk 100 pclk 50
+    mrc p15,0,r0,c1,c0,0
+	orr r0,r0,#0xc0000000   //R1_nF:OR:R1_iA
+	mcr p15,0,r0,c1,c0,0
     ldr r1,=0x4c000014
     ldr r0,=0x5
     str r0,[r1]
@@ -68,7 +81,14 @@ reset:
     //重定位
     bl relocate_code
     bl clean_bss
+    //
+    ldr r1,=0xffffff30
+    mrs r0,cpsr 
+    and r0,r0,r1
+    msr cpsr,r0
     bl uart_init
+    mrs r0,cpsr
+    bl print_hex
     bl test1
 undf:
     .word 0xdeadc0de

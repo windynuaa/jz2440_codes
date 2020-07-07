@@ -18,12 +18,12 @@ void uart_init()
 
 void test1()
 {
-    puts("point a \r\n");
+    puts("\r\npoint a \r\n");
 }
 
 void test2()
 {
-    puts("point b \r\n");
+    puts("\r\npoint b \r\n");
 }
 int putc(int c)
 {

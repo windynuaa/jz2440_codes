@@ -4,6 +4,7 @@ int main()
 {
     int i;
     init_led();
+    init_exint0();
     //sdram_init();
     open_led(1);
     //uart_init();
@@ -16,6 +17,6 @@ int main()
     //    printf("%x\n\r",*((int*)i));
     //printf("asd4%c,%c,%c,%c,%c %s\n\r,%x",'x','s','s','s','x',"8908",0xabcdef);
     //dim_led(0X1500);
-    while(1);
+    dim_led();
     return 0;
 }
