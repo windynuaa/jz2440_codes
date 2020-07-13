@@ -31,7 +31,7 @@ Disassembly of section .text:
 30000058:	03a05000 	moveq	r5, #0	; 0x0
 3000005c:	e5801000 	str	r1, [r0]
 30000060:	eb00004e 	bl	300001a0 <sdram_init>
-30000064:	e1a00005 	mov	r0, r5
+30000064:	e3a00000 	mov	r0, #0	; 0x0
 30000068:	eb00000a 	bl	30000098 <relocate_code>
 3000006c:	eb000034 	bl	30000144 <clean_bss>
 30000070:	eb00034b 	bl	30000da4 <uart_init>
